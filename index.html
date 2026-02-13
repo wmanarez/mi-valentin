@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro 14 💖</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+       body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #ff416c, #ff4b2b, #8e2de2, #1a001f);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    color: white;
+    overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+        }
+
+        /* SOBRE MEJORADO */
+        .envelope-wrapper {
+            perspective: 1200px;
+            margin-top: 60px;
+        }
+
+        .envelope {
+            width: 220px;
+            height: 140px;
+            position: relative;
+            margin: auto;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .envelope-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #ff4b6e, #ff2e63);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: absolute;
+            z-index: 1;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(145deg, #ff2e63, #ff1e56);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top;
+            transition: transform 0.8s ease;
+            z-index: 2;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .heart-seal {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 28px;
+            z-index: 3;
+        }
+
+        /* CARTA */
+        .letter {
+            display: none;
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+            min-height: 150px;
+        }
+
+        /* CARRUSEL */
+        .carousel-item img {
+            height: 600px;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 6s ease;
+        }
+
+        .carousel-item.active img {
+            transform: scale(1.08);
+        }
+
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        /* CONTADOR */
+        .counter-box {
+            margin-top: 80px;
+            padding: 40px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+        }
+
+        /* CORAZONES */
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+        }
+
+        .carousel {
+            margin-top: -80px;
+        }
+
+        .modal-content {
+            background: #fff;
+            color: #333;
+        }
+
+        .modal-body {
+            color: #333 !important;
+            font-size: 1.1rem;
+        }
+        #stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<canvas id="stars"></canvas>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="glass text-center">
+            <h1>Quieres ser Hoy, mañana y siempre mi valentin? 💘 </h1>
+            <p>Presiona el sobre...</p>
+
+            <div class="envelope-wrapper">
+                <div class="envelope" onclick="openLetter()">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body"></div>
+                    <div class="heart-seal">💖</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container mt-2 mb-5">
+        <div id="carouselLove" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <img src="foto1.jpeg" class="d-block w-100">
+                    <div class="carousel-caption">
+                        <h3>Te quiero con todo lo bueno que no ves</h3>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="foto2.jpeg" class="d-block w-100">
+                    <div class="carousel-caption">
+                        <h3>Y todo lo malo que dices tener</h3>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="foto3.jpeg" class="d-block w-100">
+                    <div class="carousel-caption">
+                        <h3>Eres mi persona favorita 💖</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <section class="container text-center">
+        <div class="counter-box">
+            <h2>Nuestro Tiempo Juntos ⏳</h2>
+            <p id="relationshipTime" class="fs-4 mt-3"></p>
+        </div>
+    </section>
+
+    <div class="letter text-center" id="loveLetter"></div>
+    <!-- MODAL CARTA -->
+    <div class="modal fade" id="loveModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4" style="border-radius:20px;">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Mi Amor 💖</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalLetterText" style="white-space:pre-line;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+        /* CONTADOR EXACTO */
+        const startDate = new Date("2024-11-16");
+
+        function calculate() {
+            const now = new Date();
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            document.getElementById("relationshipTime").innerHTML =
+                `${years} año(s), ${months} mes(es), ${days} día(s) 💞`;
+        }
+
+        calculate();
+        setInterval(calculate, 86400000);
+
+
+        /* ABRIR CARTA */
+        const message = `
+Desde el 16 de noviembre de 2024 comenzó la mejor etapa de mi vida.
+
+Gracias por cada risa, cada aventura y cada abrazo.
+Te quiero con todo lo bueno que no ves
+y todo lo malo que dices tener.
+
+Eres mi persona favorita,
+mi casualidad más bonita,
+mi lugar seguro.
+
+Hoy, mañana y siempre… te elijo a ti 💞
+`;
+
+        let index = 0;
+
+        function openLetter() {
+            const envelope = document.querySelector(".envelope");
+            envelope.classList.add("open");
+
+            intenseHearts();
+
+            const modal = new bootstrap.Modal(document.getElementById('loveModal'));
+            modal.show();
+
+            document.getElementById("modalLetterText").innerHTML = "";
+            index = 0;
+
+            function typeWriter() {
+                if (index < message.length) {
+                    document.getElementById("modalLetterText").innerHTML += message.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, 35);
+                }
+            }
+
+            setTimeout(typeWriter, 500);
+        }
+
+
+        /* LLUVIA INTENSA */
+        function intenseHearts() {
+            let interval = setInterval(() => {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "💖";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.fontSize = (Math.random() * 25 + 15) + "px";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }, 150);
+
+            setTimeout(() => clearInterval(interval), 3000);
+        }
+
+        const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+
+for (let i = 0; i < 150; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2,
+        speed: Math.random() * 0.5
+    });
+}
+
+function animateStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+
+        star.y += star.speed;
+        if (star.y > canvas.height) star.y = 0;
+    });
+
+    requestAnimationFrame(animateStars);
+}
+
+animateStars();
+
+
+    </script>
+
+</body>
+
+</html>
